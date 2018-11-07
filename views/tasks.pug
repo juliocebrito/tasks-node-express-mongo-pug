@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+  body
+    h1= message
+    form(method='POST' action='/tasks/create')
+      label(for='') Name:
+      input#name.form-control(type='text', placeholder='' name='name')
+      label(for='') Description:
+      input#email.form-control(type='text', placeholder='' name='description')
+      label(for='') State:
+      input(type='checkbox', placeholder='' name='state' value="true")
+      button(type='submit') Create
+    ul
+    each val, index in tasks
+      li= index + 1 + ' - ' + val.name + ' - ' + val.description + ' - ' + val.createdAt
+      form(method='POST' action='/tasks/update/' + val._id)
+        label(for='') Name:
+        input#name.form-control(type='text', placeholder='' name='name')
+        label(for='') Description:
+        input#email.form-control(type='text', placeholder='' name='description')
+        label(for='') State:
+        input(type='checkbox', placeholder='' name='state' value="true")
+        button(type='submit') Update
+      a(href="/tasks/delete/" + val._id) Delete
